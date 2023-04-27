@@ -5,29 +5,28 @@
 #
 
 # @lc code=start
-from typing import List
+# from typing import List
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         n = len(nums)
-        lst_l = [1] * n
-        lst_r = [1] * n
+        res = [1] * n
 
-        for i in range(len(lst_l)):
+        for i in range(n):
             if i == 0:
                 continue
             else:
-                lst_l[i] = lst_l[i-1] * nums[i - 1]
+                res[i] = res[i-1] * nums[i - 1]
 
-        for i in range(len(lst_r)-1, -1, -1): 
-            if i == len(lst_r) - 1:
-                continue
-            else:
-                lst_r[i] = lst_r[i+1] * nums[i + 1]
+        
+        multiplier = 1
+        for i in range(n-1, -1, -1): 
+            res[i] = res[i] * multiplier
+            multiplier *= nums[i]
 
-        return [lst_l[i]*lst_r[i] for i in range(len(nums))] 
+        return res
 # @lc code=end
 
-if __name__ == "__main__":
-    s = Solution()
-    nums = [1,2,3,4]
-    print(s.productExceptSelf(nums)) 
+# if __name__ == "__main__":
+#     s = Solution()
+#     nums = [1,2,3,4]
+#     print(s.productExceptSelf(nums)) 

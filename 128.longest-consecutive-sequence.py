@@ -7,33 +7,31 @@
 # @lc code=start
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        def calculateLongestLength(dic, n): #计算以当前数为始的最长序列长度，并返回长度
-            if n + 1 in dic:
-                if dic[n+1] != None:
-                    dic[n] = dic[n+1] + 1
-                else:
-                    dic[n] = calculateLongestLength(dic, n + 1) + 1
-            else:
-                dic[n] = 1
+        longest_sequence_length = 0
+        nums_set = set(nums)
 
-            return dic[n]
+        while len(nums_set):
+            num = nums_set.pop()
+            sequence_length = 1
 
-        dic = {key: None for key in nums}
-        global_longest_length = 0
+            # 往左找连续数
+            left_num = num - 1
+            while left_num in nums_set:
+                nums_set.remove(left_num)
+                sequence_length += 1
+                left_num -= 1
 
-        for num in dic:
-            # 没走过的路就先走一下
-            if dic[num] == None:
-                calculateLongestLength(dic, num)
+            # 往右找连续数
+            right_num = num + 1
+            while right_num in nums_set:
+                nums_set.remove(right_num)
+                sequence_length += 1
+                right_num += 1
             
-            # 不管是刚走过，还是之前走的时候顺带走过了，反正dic[num]有个数了
-            if dic[num] > global_longest_length:
-                global_longest_length = dic[num]
-        
-        return global_longest_length
-    
-
-
-        
+            # 全部找完之后，判断一下这次抓出的序列有没有比最长的还长
+            if sequence_length > longest_sequence_length:
+                longest_sequence_length = sequence_length
+            
+        return longest_sequence_length
 # @lc code=end
 

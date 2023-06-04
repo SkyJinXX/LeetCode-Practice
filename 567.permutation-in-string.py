@@ -26,7 +26,7 @@ class Solution:
                         if dic_try_length == len(s1):
                             return True
                     else: # 2. already meet the requrement, we have to cut the try_length from left
-                        while s2[L] != s2[R]:
+                        while s2[L] != s2[R]: # how to code more elegant?
                             dic_try[s2[L]] -= 1
                             dic_try_length -= 1
                             L += 1
@@ -45,7 +45,6 @@ class Solution:
                 dic_try = {}
                 dic_try_length = 0
                 L, R = R + 1, R + 1
-
 
         return False
 # @lc code=end

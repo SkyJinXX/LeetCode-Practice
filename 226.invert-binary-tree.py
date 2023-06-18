@@ -13,6 +13,18 @@
 #         self.right = right
 class Solution:
     def invertTree(self, root: Optional[TreeNode]) -> Optional[TreeNode]:
+        stk = []
+        if root:
+            stk.append(root)
         
+        while stk:
+            node = stk.pop()
+            node.left, node.right = node.right, node.left
+            if node.left:
+                stk.append(node.left)
+            if node.right:
+                stk.append(node.right)
+        
+        return root
 # @lc code=end
 

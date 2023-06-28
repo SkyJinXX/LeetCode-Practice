@@ -1,7 +1,7 @@
 #
-# @lc app=leetcode id=102 lang=python3
+# @lc app=leetcode id=199 lang=python3
 #
-# [102] Binary Tree Level Order Traversal
+# [199] Binary Tree Right Side View
 #
 
 # @lc code=start
@@ -11,25 +11,23 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-from collections import deque 
 class Solution:
-    def levelOrder(self, root: Optional[TreeNode]) -> List[List[int]]:
+    def rightSideView(self, root: Optional[TreeNode]) -> List[int]:
         res = []
         que = deque()
         if root: # because We don't want null node in the queue, because we don't need to output null node.
             que.append(root)
         while que:
-            temp = []
+            # temp = []
             for _ in range(len(que)):
                 node = que.popleft()
-                temp.append(node.val)
+                # temp.append(node.val)
                 if node.left:
                     que.append(node.left)
                 if node.right:
                     que.append(node.right)
-            res.append(temp)
+            res.append(node.val)
         
         return res
-
 # @lc code=end
 

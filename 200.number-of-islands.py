@@ -7,7 +7,7 @@
 # @lc code=start
 # [["1","1","0","0","0"],["1","1","0","0","0"],["0","0","1","0","0"],["0","0","0","1","1"]]
 # [["1","1","1"],["0","1","0"],["1","1","1"]]
-# class UnionHelper: # try using set instead of parent list, but failed
+# class UnionHelper: # try using set instead of parent list, but failed(aborted)
 #     def __init__(self, grid):
 #         m = len(grid)
 #         n = len(grid[0])

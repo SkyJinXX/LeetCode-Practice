@@ -36,13 +36,15 @@ class Solution:
         # generate a max_heap from counter
         max_heap = []
         for task, number in counter.items():
-            heapq.heappush([-number, task])
+            heapq.heappush(max_heap, [-number, task])
         
         cooldown_queue = deque([[1, None] for _ in range(n)])
 
         interval = 0
-        while max_heap or cooldown_queue[-1][1] != None:
+        real_length_of_queue = 0
+        while max_heap or real_length_of_queue:
             
+            task = [1, None] # a fake task, only to take a seat in the queue
             # select a task from max_heap and do it
             if max_heap:
                 task = heapq.heappop(max_heap)
@@ -50,11 +52,17 @@ class Solution:
                 # if the task hasn't been done
                 if task[0] != 0:
                     cooldown_queue.append(task)
+                    real_length_of_queue += 1
+                else:
+                    cooldown_queue.append([1, None])
+            else:
+                cooldown_queue.append([1, None])
             
             # one unit of time has passed, add the cooldown finished task back
             task = cooldown_queue.popleft()
             if task[1] != None:
                 heapq.heappush(max_heap, task)
+                real_length_of_queue -= 1
 
             interval += 1
         
